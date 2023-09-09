@@ -162,18 +162,7 @@ const AuthForm = (props: AuthFormProps) => {
                         </div>
                     </form>
                 </Form>
-
-                <div
-                    className="
-            flex 
-            gap-2 
-            justify-center 
-            text-sm 
-            mt-6 
-            px-2 
-            text-gray-500
-          "
-                >
+                <div className=" flex gap-2 items-center pt-2 text-sm text-gray-500">
                     <div>
                         {variant === 'LOGIN' ? 'New?' : 'Already have an account?'}
                     </div>
