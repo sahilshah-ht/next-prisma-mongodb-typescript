@@ -21,7 +21,11 @@ const ProtectedRouteWrapper = ({
         if (loading || !router) return;
 
         if (unAuthorized) {
-            router.push('/login');
+            if (pathname === '/register') {
+                router.push('/register');
+            } else {
+                router.push('/login');
+            }
         }
     }, [loading, unAuthorized, sessionStatus, router]);
 
