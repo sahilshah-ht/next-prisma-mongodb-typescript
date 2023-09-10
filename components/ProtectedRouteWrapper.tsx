@@ -1,6 +1,6 @@
 "use client"
 import { useEffect } from 'react'
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useSession } from 'next-auth/react'
 import AuthForm from './AuthForm';
 
@@ -12,6 +12,7 @@ const ProtectedRouteWrapper = ({
     children,
 }: ProtectedRouteWrapperProps) => {
     const router = useRouter();
+    const pathname = usePathname();
     const { status: sessionStatus } = useSession();
     const authorized = sessionStatus === 'authenticated';
     const unAuthorized = sessionStatus === 'unauthenticated';
@@ -28,7 +29,7 @@ const ProtectedRouteWrapper = ({
         return <>Loading app...</>;
     }
 
-    return authorized ? <div>{children}</div> : <AuthForm variant='LOGIN' />;
+    return authorized ? <div>{children}</div> : <AuthForm variant={pathname === '/login' ? 'LOGIN' : 'REGISTER'} />;
 }
 
 export default ProtectedRouteWrapper;
