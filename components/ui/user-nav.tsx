@@ -3,9 +3,11 @@ import { signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 import { Button } from "./button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger } from "./dropdown-menu";
+import { useRouter } from "next/navigation";
 
 export function UserNav() {
     const { data: session } = useSession();
+    const router = useRouter();
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -35,7 +37,7 @@ export function UserNav() {
                         Billing
                         <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
                     </DropdownMenuItem>
-                    <DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => { router.push('/setting/profile') }}>
                         Settings
                         <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
                     </DropdownMenuItem>
