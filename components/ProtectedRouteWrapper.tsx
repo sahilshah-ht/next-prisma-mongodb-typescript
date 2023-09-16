@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useRouter, usePathname } from "next/navigation";
 import { useSession } from 'next-auth/react'
 import AuthForm from './AuthForm';
+import { MainLoader } from './ui/main-loader';
 
 interface ProtectedRouteWrapperProps {
     children: React.ReactNode
@@ -27,10 +28,9 @@ const ProtectedRouteWrapper = ({
                 router.push('/login');
             }
         }
-    }, [loading, unAuthorized, sessionStatus, router]);
-
+    }, [loading, unAuthorized, sessionStatus, router, pathname]);
     if (loading) {
-        return <>Loading app...</>;
+        return <MainLoader />;
     }
 
     return authorized ? <div>{children}</div> : <AuthForm variant={pathname === '/login' ? 'LOGIN' : 'REGISTER'} />;
