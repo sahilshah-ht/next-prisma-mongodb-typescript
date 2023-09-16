@@ -33,6 +33,10 @@ const ProtectedRouteWrapper = ({
         return <MainLoader />;
     }
 
+    if (!loading && unAuthorized && pathname !== 'register') {
+        router.push('/login');
+    }
+
     return <div>{children}</div>;
 }
 

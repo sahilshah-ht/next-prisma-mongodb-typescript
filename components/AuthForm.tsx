@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import { signIn, useSession } from 'next-auth/react';
-import { useCallback, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from "next/navigation";
 import * as z from 'zod';
@@ -46,20 +46,14 @@ const AuthForm = ({ className, ...props }: AuthFormProps) => {
     const { variant } = props
     const session = useSession();
     const router = useRouter();
-    const { toast } = useToast()
+    const { toast } = useToast();
+    const [isLoading, setIsLoading] = useState(false)
+
     useEffect(() => {
         if (session?.status === 'authenticated') {
             router.push('/')
         }
     }, [session?.status, router]);
-
-    const toggleVariant = useCallback(() => {
-        if (variant === 'LOGIN') {
-            router.push('/register')
-        } else {
-            router.push('/login')
-        }
-    }, [router, variant]);
 
     const myFormSchema = variant === 'LOGIN' ? loginFormSchema : registerFormSchema
     const form = useForm({
@@ -72,6 +66,7 @@ const AuthForm = ({ className, ...props }: AuthFormProps) => {
     })
 
     const onSubmit = async (values: z.infer<typeof myFormSchema>) => {
+        setIsLoading(true)
         if (variant === 'REGISTER') {
             axios.post('/api/register', values)
                 .then(() => signIn('credentials', {
@@ -84,7 +79,9 @@ const AuthForm = ({ className, ...props }: AuthFormProps) => {
                     }
                 })
                 .catch(() => toast({ title: 'Something went wrong!' }))
-                .finally(() => { })
+                .finally(() => {
+                    setIsLoading(false)
+                })
         }
 
         if (variant === 'LOGIN') {
@@ -97,11 +94,11 @@ const AuthForm = ({ className, ...props }: AuthFormProps) => {
                         toast({ title: 'Invalid credentials!' });
                     }
                 })
-                .finally(() => { })
+                .finally(() => {
+                    setIsLoading(false)
+                })
         }
     }
-    const isLoading = form.formState.isSubmitting;
-
     return (
         <div className={cn("grid gap-6", className)} {...props}>
             <Form {...form}>
@@ -141,7 +138,7 @@ const AuthForm = ({ className, ...props }: AuthFormProps) => {
                             <FormItem>
                                 <FormLabel className="uppercase text-xs font-bold "> Password</FormLabel>
                                 <FormControl>
-                                    <Input disabled={isLoading}
+                                    <Input disabled={isLoading} type="password"
                                         className="focus-visible:ring-0  focus-visible:ring-offset-0" placeholder="Enter password" {...field} />
                                 </FormControl>
                                 <FormMessage />
