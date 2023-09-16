@@ -27,7 +27,7 @@ const ProtectedRouteWrapper = ({
                 router.push('/login');
             }
         }
-    }, [loading, unAuthorized, sessionStatus, router]);
+    }, [loading, unAuthorized, sessionStatus, router, pathname]);
 
     if (loading) {
         return <>Loading app...</>;
