@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import { Open_Sans } from 'next/font/google'
 import { Toaster } from '@/components/ui/toaster'
 import AuthContext from '@/context/AuthContext'
+import { ThemeProvider } from '@/components/ui/theme-provider'
 
 
 const font = Open_Sans({ subsets: ['latin'] })
@@ -22,10 +23,12 @@ export default function RootLayout({
 }: RootLayoutProps) {
     return (
         <html lang="en">
-            <body className={cn(font.className, "bg-white dark:bg-[#313338]")}>
-                <AuthContext>
-                    {children}
-                </AuthContext>
+            <body className={cn(font.className)}>
+                <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+                    <AuthContext>
+                        {children}
+                    </AuthContext>
+                </ThemeProvider>
                 <Toaster />
             </body>
         </html>
