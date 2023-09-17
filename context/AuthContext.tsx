@@ -2,6 +2,8 @@
 
 import { SessionProvider } from "next-auth/react";
 import ProtectedRouteWrapper from "@/components/ProtectedRouteWrapper";
+import { Provider } from "react-redux";
+import store from "@/store";
 
 
 export interface AuthContextProps {
@@ -13,9 +15,11 @@ export default function AuthContext({
 }: AuthContextProps) {
     return (
         <SessionProvider>
-            <ProtectedRouteWrapper>
-                {children}
-            </ProtectedRouteWrapper>
+            <Provider store={store}>
+                <ProtectedRouteWrapper>
+                    {children}
+                </ProtectedRouteWrapper>
+            </Provider>
         </SessionProvider>
     );
 }
