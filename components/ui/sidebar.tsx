@@ -1,9 +1,11 @@
 "use client"
 import React, { useContext, createContext, useState, ReactNode } from "react";
 import { ChevronLast, ChevronFirst } from "lucide-react";
+import { useSelector } from "react-redux";
+import { RootState, toggleSidebar, useAppDispatch } from "@/store";
 
 interface SidebarContextType {
-    expanded: boolean;
+    isOpen: boolean;
 }
 
 const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
@@ -13,26 +15,26 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ children }: SidebarProps): JSX.Element {
-    const [expanded, setExpanded] = useState(true);
+    const { isOpen } = useSelector((state: RootState) => state.ui.sidebar)
+    const dispatch = useAppDispatch();
     return (
         <div className="fixed z-20">
             <aside className="h-screen">
                 <nav className="h-full flex flex-col  border-r shadow-sm relative">
-                    <SidebarContext.Provider value={{ expanded }}>
+                    <SidebarContext.Provider value={{ isOpen }}>
                         <ul className="flex-1 px-3">{children}</ul>
                     </SidebarContext.Provider>
                     <button
-                        onClick={() => setExpanded((curr) => !curr)}
+                        onClick={() => dispatch(toggleSidebar())}
                         className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100 absolute top-0 right-0"
                     >
-                        {expanded ? <ChevronFirst /> : <ChevronLast />}
+                        {isOpen ? <ChevronFirst /> : <ChevronLast />}
                     </button>
                 </nav>
             </aside>
         </div>
     );
 }
-
 interface SidebarItemProps {
     icon: JSX.Element;
     text: string;
@@ -41,7 +43,7 @@ interface SidebarItemProps {
 }
 
 export function SidebarItem({ icon, text, active, alert }: SidebarItemProps): JSX.Element {
-    const { expanded } = useContext(SidebarContext) || { expanded: true };
+    const { isOpen } = useContext(SidebarContext) || { isOpen: true };
 
     return (
         <li
@@ -57,18 +59,18 @@ export function SidebarItem({ icon, text, active, alert }: SidebarItemProps): JS
         >
             {icon}
             <span
-                className={`overflow-hidden transition-all ${expanded ? "w-52 ml-3" : "w-0"}`}
+                className={`overflow-hidden transition-all ${isOpen ? "w-52 ml-3" : "w-0"}`}
             >
                 {text}
             </span>
             {alert && (
                 <div
-                    className={`absolute right-2 w-2 h-2 rounded bg-indigo-400 ${expanded ? "" : "top-2"
+                    className={`absolute right-2 w-2 h-2 rounded bg-indigo-400 ${isOpen ? "" : "top-2"
                         }`}
                 />
             )}
 
-            {!expanded && (
+            {!isOpen && (
                 <div
                     className={`
           absolute left-full rounded-md px-2 py-1 ml-6
