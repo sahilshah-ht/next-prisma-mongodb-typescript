@@ -1,6 +1,8 @@
 "use client"
+import Sidebar, { SidebarItem } from "@/components/ui/sidebar"
 import SiteNav from "@/components/ui/site-nav"
 import { RootState } from "@/store"
+import { LayoutDashboard } from "lucide-react"
 import { useSelector } from "react-redux"
 
 interface MainLayoutProps {
@@ -13,7 +15,10 @@ export default function MainLayout({
   return (
     <div>
       <SiteNav />
-      <div className={`${isOpen ? 'pl-72' : 'pl-16'}`}>
+      <Sidebar>
+        <SidebarItem icon={<LayoutDashboard size={20} />} text="Dashboard" alert />
+      </Sidebar>
+      <div className={`${isOpen ? 'pl-60' : 'pl-16'} transition-all`}>
         {children}
       </div>
     </div>

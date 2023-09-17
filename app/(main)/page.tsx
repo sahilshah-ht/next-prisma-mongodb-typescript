@@ -8,13 +8,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { CalendarDateRangePicker } from "@/components/ui/date-range-picker"
-import { MainNav } from "@/components/ui/main-nav"
 import { Overview } from "@/components/ui/overview"
 import { RecentSales } from "@/components/ui/recent-sales"
-import { Search } from "@/components/ui/search"
-import TeamSwitcher from "@/components/ui/team-switcher"
-import { UserNav } from "@/components/ui/user-nav"
-import { ModeToggle } from "@/components/ui/mode-toggle"
 
 export const metadata: Metadata = {
   title: "Dashboard",

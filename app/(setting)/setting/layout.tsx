@@ -2,6 +2,7 @@ import { Metadata } from "next"
 import Image from "next/image"
 
 import { SidebarNav } from "@/components/ui/sidebar-nav"
+import SiteNav from "@/components/ui/site-nav"
 
 export const metadata: Metadata = {
     title: "Forms",
@@ -38,6 +39,7 @@ interface SettingsLayoutProps {
 export default function SettingsLayout({ children }: SettingsLayoutProps) {
     return (
         <>
+            <SiteNav />
             <div className="md:hidden">
                 <Image
                     src="/examples/forms-light.png"

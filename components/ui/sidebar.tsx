@@ -1,6 +1,6 @@
 "use client"
 import React, { useContext, createContext, useState, ReactNode } from "react";
-import { ChevronLast, ChevronFirst } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useSelector } from "react-redux";
 import { RootState, toggleSidebar, useAppDispatch } from "@/store";
 
@@ -26,9 +26,9 @@ export default function Sidebar({ children }: SidebarProps): JSX.Element {
                     </SidebarContext.Provider>
                     <button
                         onClick={() => dispatch(toggleSidebar())}
-                        className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100 absolute top-0 right-0"
+                        className="p-0.5 border bg-background absolute top-1 -right-3.5 rounded-full"
                     >
-                        {isOpen ? <ChevronFirst /> : <ChevronLast />}
+                        {isOpen ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
                     </button>
                 </nav>
             </aside>
@@ -47,10 +47,7 @@ export function SidebarItem({ icon, text, active, alert }: SidebarItemProps): JS
 
     return (
         <li
-            className={`
-        relative flex items-center py-2 px-3 my-1
-        font-medium rounded-md cursor-pointer
-        transition-colors group
+            className={`relative flex items-center py-2 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors group
         ${active
                     ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800"
                     : "hover:bg-indigo-50 text-gray-600"
@@ -59,7 +56,7 @@ export function SidebarItem({ icon, text, active, alert }: SidebarItemProps): JS
         >
             {icon}
             <span
-                className={`overflow-hidden transition-all ${isOpen ? "w-52 ml-3" : "w-0"}`}
+                className={`overflow-hidden transition-all ${isOpen ? "w-40 ml-3" : "w-0"}`}
             >
                 {text}
             </span>
