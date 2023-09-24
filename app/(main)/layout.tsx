@@ -3,7 +3,7 @@ import { Separator } from "@/components/ui/separator"
 import Sidebar, { SidebarItem } from "@/components/ui/sidebar"
 import SiteNav from "@/components/ui/site-nav"
 import { RootState } from "@/store"
-import { BarChart3, Boxes, LayoutDashboard, LifeBuoy, Package, Receipt, Settings, UserCircle } from "lucide-react"
+import { BarChart3, Boxes, LayoutDashboard, LifeBuoy, Package, PackagePlus, Receipt, Settings, UserCircle } from "lucide-react"
 import { useSelector } from "react-redux"
 
 interface MainLayoutProps {
@@ -19,8 +19,13 @@ export default function MainLayout({
       <Sidebar className="pt-2" >
         <SidebarItem item={{
           icon: <LayoutDashboard size={20} />,
-          title: "Statistics",
-          href: '/statistics'
+          title: "Dashboard",
+          href: '/'
+        }} />
+        <SidebarItem item={{
+          icon: <PackagePlus size={20} />,
+          title: "Notes",
+          href: '/notes'
         }} />
         <SidebarItem item={{
           icon: <BarChart3 size={20} />,
