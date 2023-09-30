@@ -8,10 +8,7 @@ export default async function middleware(req: NextRequest) {
         secret: process.env.NEXTAUTH_SECRET,
     });
     if (!session) {
-        return new NextResponse(JSON.stringify({
-            message: "You must be logged in.",
-            status: 500
-        }))
+        return NextResponse.json({ error: 'You must be logged in.' }, { status: 500 })
     }
     return NextResponse.next()
 }

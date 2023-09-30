@@ -1,5 +1,9 @@
-import { db } from "@/lib/db";
+import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
+
+import { authOptions } from "@/lib/authOptions";
+import { db } from "@/lib/db";
+
 
 export async function GET(request: NextRequest) {
     const page_str = request.nextUrl.searchParams.get("page");
@@ -13,45 +17,28 @@ export async function GET(request: NextRequest) {
         skip,
         take: limit,
     });
-
-    let json_response = {
-        status: "success",
-        results: notes.length,
-        notes,
-    };
-    return NextResponse.json(json_response);
+    return NextResponse.json(notes);
 }
 
 export async function POST(request: Request) {
     try {
         const json = await request.json();
-
+        const user = await getServerSession(authOptions);
+        
         const note = await db.note.create({
-            data: json,
+            data: { ...json, userId: user?.user.id },
         });
 
         let json_response = {
             status: "success",
-            data: {
-                note,
-            },
+            data:note,
+            
         };
         return new NextResponse(JSON.stringify(json_response), {
             status: 201,
             headers: { "Content-Type": "application/json" },
         });
     } catch (error: any) {
-        if (error.code === "P2002") {
-            let error_response = {
-                status: "fail",
-                message: "note with title already exists",
-            };
-            return new NextResponse(JSON.stringify(error_response), {
-                status: 409,
-                headers: { "Content-Type": "application/json" },
-            });
-        }
-
         let error_response = {
             status: "error",
             message: error.message,
