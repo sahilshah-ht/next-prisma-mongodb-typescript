@@ -1,7 +1,7 @@
 export interface SidebarState {
-    isOpen: boolean;
+  isOpen: boolean
 }
 
 export interface UiState {
-    sidebar: SidebarState
+  sidebar: SidebarState
 }
