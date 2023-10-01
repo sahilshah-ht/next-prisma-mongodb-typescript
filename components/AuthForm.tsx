@@ -1,17 +1,19 @@
 'use client'
 
-import axios from 'axios'
-import { signIn, useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { useRouter } from 'next/navigation'
-import * as z from 'zod'
+
 import { zodResolver } from '@hookform/resolvers/zod'
+import axios from 'axios'
+import { Loader } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { signIn, useSession } from 'next-auth/react'
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
+
+import { useToast } from '@/hooks/use-toast'
 import { cn } from '@/lib/utils'
 
 import { Button } from './ui/button'
-import { useToast } from '@/hooks/use-toast'
-import { Input } from './ui/input'
 import {
   Form,
   FormControl,
@@ -20,7 +22,8 @@ import {
   FormLabel,
   FormMessage,
 } from './ui/form'
-import { Loader } from 'lucide-react'
+import { Input } from './ui/input'
+
 
 type Variant = 'LOGIN' | 'REGISTER'
 

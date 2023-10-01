@@ -1,13 +1,8 @@
 'use client'
-import { Separator } from '@/components/ui/separator'
-import Sidebar, { SidebarItem } from '@/components/ui/sidebar'
-import SiteNav from '@/components/ui/site-nav'
-import { RootState } from '@/store'
 import {
   BarChart3,
   Boxes,
   LayoutDashboard,
-  LifeBuoy,
   Package,
   PackagePlus,
   Receipt,
@@ -15,6 +10,12 @@ import {
   UserCircle,
 } from 'lucide-react'
 import { useSelector } from 'react-redux'
+
+import { Separator } from '@/components/ui/separator'
+import Sidebar, { SidebarItem } from '@/components/ui/sidebar'
+import SiteNav from '@/components/ui/site-nav'
+
+import type { RootState } from '@/store'
 
 interface MainLayoutProps {
   children: React.ReactNode

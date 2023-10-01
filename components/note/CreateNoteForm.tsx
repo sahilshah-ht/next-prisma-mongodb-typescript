@@ -5,6 +5,9 @@ import { Loader } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 
+import { useCreateNoteMutation } from '@/store/api/note.api'
+
+import { Button } from '../ui/button'
 import {
   Form,
   FormControl,
@@ -15,8 +18,6 @@ import {
   FormMessage,
 } from '../ui/form'
 import { Textarea } from '../ui/textarea'
-import { Button } from '../ui/button'
-import { useCreateNoteMutation } from '@/store/api/note.api'
 
 const noteSchema = z.object({
   text: z.string().max(160).min(4),

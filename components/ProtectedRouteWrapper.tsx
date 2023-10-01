@@ -1,7 +1,9 @@
 'use client'
 import { useEffect } from 'react'
-import { useRouter, usePathname } from 'next/navigation'
+
+import { usePathname, useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
+
 import { MainLoader } from './ui/main-loader'
 
 interface ProtectedRouteWrapperProps {

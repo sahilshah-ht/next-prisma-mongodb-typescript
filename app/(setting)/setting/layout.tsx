@@ -1,8 +1,9 @@
-import { Metadata } from 'next'
 import Image from 'next/image'
 
 import { SidebarNav } from '@/components/ui/sidebar-nav'
 import SiteNav from '@/components/ui/site-nav'
+
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Forms',

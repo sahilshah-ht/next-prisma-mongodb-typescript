@@ -1,12 +1,14 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { ChevronDownIcon } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 
+import { useToast } from '@/hooks/use-toast'
 import { cn } from '@/lib/utils'
 
-import { useToast } from '@/hooks/use-toast'
+import { Button, buttonVariants } from './button'
 import {
   Form,
   FormControl,
@@ -16,8 +18,6 @@ import {
   FormLabel,
   FormMessage,
 } from './form'
-import { Button, buttonVariants } from './button'
-import { ChevronDownIcon } from 'lucide-react'
 import { RadioGroup, RadioGroupItem } from './radio-group'
 
 const appearanceFormSchema = z.object({

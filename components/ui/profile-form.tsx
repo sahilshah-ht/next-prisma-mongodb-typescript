@@ -1,12 +1,14 @@
 'use client'
 
-import Link from 'next/link'
 import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
 import { useFieldArray, useForm } from 'react-hook-form'
 import * as z from 'zod'
 
+import { useToast } from '@/hooks/use-toast'
 import { cn } from '@/lib/utils'
 
+import { Button } from './button'
 import {
   Form,
   FormControl,
@@ -24,8 +26,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from './select'
-import { Button } from './button'
-import { useToast } from '@/hooks/use-toast'
 import { Textarea } from './textarea'
 
 const profileFormSchema = z.object({

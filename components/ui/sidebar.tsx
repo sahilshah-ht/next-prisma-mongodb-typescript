@@ -1,13 +1,19 @@
 'use client'
-import React, { useContext, createContext, ReactNode } from 'react'
+import type { ReactNode } from 'react';
+import React, { createContext, useContext } from 'react'
+
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { useSelector } from 'react-redux'
-import { RootState, toggleSidebar, useAppDispatch } from '@/store'
 import Link from 'next/link'
-import { cn } from '@/lib/utils'
-import { buttonVariants } from './button'
 import { usePathname } from 'next/navigation'
+import { useSelector } from 'react-redux'
+
+import { cn } from '@/lib/utils'
+import { toggleSidebar, useAppDispatch } from '@/store'
+
 import { ActionTooltip } from './action-tooltip'
+import { buttonVariants } from './button'
+
+import type { RootState} from '@/store';
 
 interface SidebarContextType {
   isOpen: boolean

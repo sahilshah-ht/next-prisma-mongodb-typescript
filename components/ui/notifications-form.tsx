@@ -1,10 +1,14 @@
 'use client'
 
-import Link from 'next/link'
 import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
+
 import { useToast } from '@/hooks/use-toast'
+
+import { Button } from './button'
+import { Checkbox } from './checkbox'
 import {
   Form,
   FormControl,
@@ -15,9 +19,7 @@ import {
   FormMessage,
 } from './form'
 import { RadioGroup, RadioGroupItem } from './radio-group'
-import { Button } from './button'
 import { Switch } from './switch'
-import { Checkbox } from './checkbox'
 
 const notificationsFormSchema = z.object({
   type: z.enum(['all', 'mentions', 'none'], {

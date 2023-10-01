@@ -1,9 +1,13 @@
 'use client'
 
-import { useToast } from '@/hooks/use-toast'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
+
+import { useToast } from '@/hooks/use-toast'
+
+import { Button } from './button'
+import { Checkbox } from './checkbox'
 import {
   Form,
   FormControl,
@@ -13,8 +17,6 @@ import {
   FormLabel,
   FormMessage,
 } from './form'
-import { Checkbox } from './checkbox'
-import { Button } from './button'
 
 const items = [
   {

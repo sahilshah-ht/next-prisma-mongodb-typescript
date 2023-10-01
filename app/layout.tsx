@@ -1,10 +1,13 @@
-import { cn } from '@/lib/utils'
 import './globals.css'
-import type { Metadata } from 'next'
 import { Open_Sans } from 'next/font/google'
+
+import { ThemeProvider } from '@/components/ui/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
 import AuthContext from '@/context/AuthContext'
-import { ThemeProvider } from '@/components/ui/theme-provider'
+import { cn } from '@/lib/utils'
+
+import type { Metadata } from 'next'
+
 
 const font = Open_Sans({ subsets: ['latin'] })
 

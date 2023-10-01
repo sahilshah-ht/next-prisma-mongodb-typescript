@@ -1,5 +1,7 @@
 'use client'
+import { useRouter } from 'next/navigation'
 import { signOut, useSession } from 'next-auth/react'
+
 import { Avatar, AvatarFallback, AvatarImage } from './avatar'
 import { Button } from './button'
 import {
@@ -12,7 +14,6 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from './dropdown-menu'
-import { useRouter } from 'next/navigation'
 
 export function UserNav() {
   const { data: session } = useSession()

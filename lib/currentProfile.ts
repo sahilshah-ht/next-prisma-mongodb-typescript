@@ -1,5 +1,7 @@
-import { db } from '@/lib/db'
 import { getServerSession } from 'next-auth/next'
+
+import { db } from '@/lib/db'
+
 import { authOptions } from './authOptions'
 
 export const currentProfile = async () => {

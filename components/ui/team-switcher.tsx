@@ -1,10 +1,13 @@
 'use client'
 
 import * as React from 'react'
-import { cn } from '@/lib/utils'
-import { Button } from './button'
-import { Avatar, AvatarFallback, AvatarImage } from './avatar'
+
 import { CheckIcon, PlusCircleIcon, SortAscIcon } from 'lucide-react'
+
+import { cn } from '@/lib/utils'
+
+import { Avatar, AvatarFallback, AvatarImage } from './avatar'
+import { Button } from './button'
 import {
   Command,
   CommandEmpty,
@@ -14,9 +17,6 @@ import {
   CommandList,
   CommandSeparator,
 } from './command'
-import { Popover, PopoverContent, PopoverTrigger } from './popover'
-import { Label } from './label'
-import { Input } from './input'
 import {
   Dialog,
   DialogContent,
@@ -26,6 +26,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from './dialog'
+import { Input } from './input'
+import { Label } from './label'
+import { Popover, PopoverContent, PopoverTrigger } from './popover'
 import {
   Select,
   SelectContent,
