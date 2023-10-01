@@ -14,7 +14,8 @@ import type * as LabelPrimitive from '@radix-ui/react-label'
 import type {
   ControllerProps,
   FieldPath,
-  FieldValues} from 'react-hook-form';
+  FieldValues
+} from 'react-hook-form';
 
 const Form = FormProvider
 
@@ -151,7 +152,7 @@ const FormMessage = React.forwardRef<
   const body = error ? String(error?.message) : children
 
   if (!body) {
-    return null
+    return <></>;
   }
 
   return (

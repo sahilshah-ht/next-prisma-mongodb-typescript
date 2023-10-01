@@ -79,7 +79,7 @@ export function AccountForm() {
       title: 'You submitted the following values:',
       description: (
         <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-          <code className='text-white'>{JSON.stringify(data, null, 2)}</code>
+          <code className='text-white'>{JSON.stringify(data, undefined, 2)}</code>
         </pre>
       ),
     })
@@ -168,8 +168,8 @@ export function AccountForm() {
                     >
                       {field.value
                         ? languages.find(
-                            (language) => language.value === field.value,
-                          )?.label
+                          (language) => language.value === field.value,
+                        )?.label
                         : 'Select language'}
                       <SortAscIcon className='ml-2 h-4 w-4 shrink-0 opacity-50' />
                     </Button>

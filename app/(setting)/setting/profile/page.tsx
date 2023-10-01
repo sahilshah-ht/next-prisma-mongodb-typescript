@@ -1,11 +1,7 @@
-import { getServerSession } from 'next-auth'
-
 import { ProfileForm } from '@/components/ui/profile-form'
 import { Separator } from '@/components/ui/separator'
-import { authOptions } from '@/lib/authOptions'
 
 export default async function ProfilePage() {
-  const session = await getServerSession(authOptions)
   return (
     <div className='space-y-6'>
       <div>

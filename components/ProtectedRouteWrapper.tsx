@@ -14,7 +14,6 @@ const ProtectedRouteWrapper = ({ children }: ProtectedRouteWrapperProps) => {
   const router = useRouter()
   const pathname = usePathname()
   const { status: sessionStatus } = useSession()
-  const authorized = sessionStatus === 'authenticated'
   const unAuthorized = sessionStatus === 'unauthenticated'
   const loading = sessionStatus === 'loading'
   useEffect(() => {

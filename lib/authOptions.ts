@@ -49,13 +49,13 @@ export const authOptions: NextAuthOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async jwt({ token, user, session }) {
+    async jwt({ token, user }) {
       if (user) {
         return { ...token, id: user.id }
       }
       return token
     },
-    async session({ session, user, token }) {
+    async session({ session, token }) {
       return {
         ...session,
         user: {

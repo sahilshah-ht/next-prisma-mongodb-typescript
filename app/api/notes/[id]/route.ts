@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 
 import { db } from '@/lib/db'
 
@@ -86,7 +86,7 @@ export async function DELETE(
       where: { id },
     })
 
-    return new NextResponse(null, { status: 204 })
+    return new NextResponse(undefined, { status: 204 })
   } catch (error: any) {
     if (error.code === 'P2025') {
       let error_response = {
