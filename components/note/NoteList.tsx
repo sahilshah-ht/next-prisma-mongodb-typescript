@@ -11,8 +11,13 @@ import {
 } from '@/components/ui/table'
 import { useGetNoteListQuery } from '@/store/api/note.api'
 
+import { MainLoader } from '../ui/main-loader'
+
 export const NoteList = () => {
-  const { data: notes } = useGetNoteListQuery()
+  const { data: notes, isLoading } = useGetNoteListQuery()
+  if (isLoading) {
+    return <MainLoader />
+  }
   return (
     <div>
       <Table>

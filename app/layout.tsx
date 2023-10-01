@@ -1,6 +1,9 @@
 import './globals.css'
+import { Suspense } from 'react'
+
 import { Open_Sans } from 'next/font/google'
 
+import { MainLoader } from '@/components/ui/main-loader'
 import { ThemeProvider } from '@/components/ui/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
 import AuthContext from '@/context/AuthContext'
@@ -24,10 +27,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='en'>
       <body className={cn(font.className)}>
-        <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-          <AuthContext>{children}</AuthContext>
-        </ThemeProvider>
-        <Toaster />
+        <Suspense fallback={<MainLoader />}>
+          <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+            <AuthContext>{children}</AuthContext>
+          </ThemeProvider>
+          <Toaster />
+        </Suspense>
       </body>
     </html>
   )

@@ -1,5 +1,7 @@
-import { Note } from '@prisma/client'
 import { api } from './ServerApi'
+
+import type { Note } from '@prisma/client'
+
 
 export const noteApi = api.injectEndpoints({
   endpoints: (builder) => ({
