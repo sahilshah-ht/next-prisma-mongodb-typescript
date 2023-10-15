@@ -10,7 +10,7 @@ export const noteApi = api.injectEndpoints({
         url: '/notes',
         method: 'GET',
       }),
-      providesTags: [],
+      providesTags: ['Note'],
     }),
     createNote: builder.mutation<Note, { text: string }>({
       query: (note) => ({
@@ -20,7 +20,29 @@ export const noteApi = api.injectEndpoints({
       }),
       invalidatesTags: ['Note'],
     }),
+    getNoteListById: builder.query<Note, string>({
+      query: (id) => ({
+        url: `/notes/${id}`,
+        method: 'GET',
+      }),
+      providesTags: ['Note'],
+    }),
+    updateNote: builder.mutation<Note, { text: string, id: string }>({
+      query: ({ id, ...note }) => ({
+        url: `/notes/${id}`,
+        method: 'PATCH',
+        body: note,
+      }),
+      invalidatesTags: ['Note'],
+    }),
+    deleteNote: builder.mutation<Note, string>({
+      query: (id) => ({
+        url: `/notes/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Note'],
+    }),
   }),
 })
 
-export const { useGetNoteListQuery, useCreateNoteMutation } = noteApi
+export const { useGetNoteListQuery, useCreateNoteMutation, useGetNoteListByIdQuery, useUpdateNoteMutation, useDeleteNoteMutation } = noteApi
