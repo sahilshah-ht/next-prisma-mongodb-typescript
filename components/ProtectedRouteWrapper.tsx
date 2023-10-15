@@ -32,8 +32,8 @@ const ProtectedRouteWrapper = ({ children }: ProtectedRouteWrapperProps) => {
     return <MainLoader />
   }
 
-  if (!loading && unAuthorized && pathname !== '/register') {
-    router.push('/login')
+  if (!loading && unAuthorized && (pathname !== '/register' && pathname !== '/login')) {
+    return <MainLoader />
   }
 
   return <div>{children}</div>
