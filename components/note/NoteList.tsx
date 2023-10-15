@@ -1,5 +1,7 @@
 'use client'
 
+import Link from 'next/link'
+
 import {
   Table,
   TableBody,
@@ -9,14 +11,19 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { useGetNoteListQuery } from '@/store/api/note.api'
+import { useDeleteNoteMutation, useGetNoteListQuery } from '@/store/api/note.api'
 
+import { Button } from '../ui/button'
 import { MainLoader } from '../ui/main-loader'
 
 export const NoteList = () => {
-  const { data: notes, isLoading } = useGetNoteListQuery()
+  const { data: notes, isLoading } = useGetNoteListQuery();
+  const [deleteNote] = useDeleteNoteMutation()
   if (isLoading) {
     return <MainLoader />
+  }
+  const handleDelete = async (id: string) => {
+    await deleteNote(id)
   }
   return (
     <div>
@@ -26,8 +33,7 @@ export const NoteList = () => {
           <TableRow>
             <TableHead className='w-[100px]'>id</TableHead>
             <TableHead>text</TableHead>
-            <TableHead>Method</TableHead>
-            <TableHead className='text-right'>Amount</TableHead>
+            <TableHead className='text-right'>Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -35,8 +41,10 @@ export const NoteList = () => {
             <TableRow key={note.id}>
               <TableCell className='font-medium'>{note.id}</TableCell>
               <TableCell>{note.text}</TableCell>
-              <TableCell>Credit Card</TableCell>
-              <TableCell className='text-right'>$250.00</TableCell>
+              <TableCell className='text-right'>
+                <Link href={`/notes/${note.id}`} >Edit</Link>
+                <Button onClick={() => handleDelete(note.id)}>Delete</Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

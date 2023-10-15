@@ -1,11 +1,14 @@
 'use client'
 
+import { type FC, useEffect } from 'react'
+
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader } from 'lucide-react'
+import { useParams } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 
-import { useCreateNoteMutation } from '@/store/api/note.api'
+import { useCreateNoteMutation, useGetNoteListByIdQuery, useUpdateNoteMutation } from '@/store/api/note.api'
 
 import { Button } from '../ui/button'
 import {
@@ -17,7 +20,12 @@ import {
   FormLabel,
   FormMessage,
 } from '../ui/form'
+import { MainLoader } from '../ui/main-loader'
 import { Textarea } from '../ui/textarea'
+
+interface NoteFormProps extends React.HTMLAttributes<HTMLDivElement> {
+  isEditable?: boolean
+}
 
 const noteSchema = z.object({
   text: z.string().max(160).min(4),
@@ -25,20 +33,47 @@ const noteSchema = z.object({
 
 type NoteFormValues = z.infer<typeof noteSchema>
 
-export function CreateNoteForm() {
+
+export const NoteForm: FC<NoteFormProps> = ({ isEditable }) => {
+  const { id } = useParams();
+  const { data: note, isLoading: isNoteLoading } = useGetNoteListByIdQuery(id as string, {
+    skip: !isEditable || !id
+  })
+
+
   const form = useForm<NoteFormValues>({
     resolver: zodResolver(noteSchema),
     mode: 'onChange',
+    defaultValues: {
+      text: ''
+    }
   })
 
+  useEffect(() => {
+    if (note) {
+      form.setValue('text', note.text);
+    }
+  }, [form, note]);
+
+
+
   const [createNote, { isLoading }] = useCreateNoteMutation()
+  const [updateNote] = useUpdateNoteMutation()
+
   async function onSubmit(data: NoteFormValues) {
+    if (isEditable && note) {
+      console.log({ ...data, id: note.id })
+      await updateNote({ ...data, id: note.id })
+      return;
+    }
     await createNote(data)
     form.reset({
       text: '',
     })
   }
-
+  if (isNoteLoading) {
+    return <MainLoader />
+  }
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
@@ -47,7 +82,7 @@ export function CreateNoteForm() {
           name='text'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Note</FormLabel>
+              <FormLabel>{isEditable ? 'Edit' : 'Create'}Note</FormLabel>
               <FormControl>
                 <Textarea
                   placeholder='Tell us a little bit about yourself'
